@@ -13,6 +13,16 @@ export default {
         'itemTitle': String,
         'itemContent': String,
         'price': Number
-        }
+        },
+    mounted() {
+        console.log(this.itemTitle);
+
+        // setTimeout(() => {
+        //     this.itemTitle = "New Title"
+        // }, 6000)
+
+        // modifying prop is a bad idea.
+        // this.itemTitle = "New Title";
+    }
 }
 </script>

@@ -1859,6 +1859,13 @@ __webpack_require__.r(__webpack_exports__);
     'itemTitle': String,
     'itemContent': String,
     'price': Number
+  },
+  mounted: function mounted() {
+    console.log(this.itemTitle); // setTimeout(() => {
+    //     this.itemTitle = "New Title"
+    // }, 6000)
+    // modifying prop is a bad idea.
+    // this.itemTitle = "New Title";
   }
 });
 
@@ -1884,10 +1891,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     BookableListItem: _BookableListItem__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      bookables: null,
+      loading: false
+    };
+  },
+  // beforeCreate() {
+  //     console.log('before create');
+  // },
+  created: function created() {
+    var _this = this;
+
+    this.loading = true;
+    console.log("created");
+    setTimeout(function () {
+      _this.bookables = [{
+        title: "Random Title1",
+        content: "Something something1"
+      }, {
+        title: "Random Title2",
+        content: "Something something2"
+      }];
+      _this.loading = false;
+    }, 2000);
   }
 });
 
@@ -37792,27 +37834,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("bookable-list-item", {
-        attrs: {
-          "item-title": "Random Title",
-          "item-content": "Random Content is in here.",
-          price: 13324
-        }
-      }),
-      _vm._v(" "),
-      _c("bookable-list-item", {
-        attrs: {
-          "item-title": "Random Title 2",
-          "item-content": "Random Content is in here 2.",
-          price: 234
-        }
-      })
-    ],
-    1
-  )
+  return _c("div", [
+    _vm.loading
+      ? _c("div", [_vm._v("Data is Loading")])
+      : _c(
+          "div",
+          _vm._l(_vm.bookables, function(bookable, index) {
+            return _c("bookable-list-item", {
+              key: index,
+              attrs: {
+                "item-title": bookable.title,
+                "item-content": bookable.content,
+                price: 13324
+              }
+            })
+          }),
+          1
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
