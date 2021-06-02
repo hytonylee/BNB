@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div class="card mb-4 p-4">
-            <h1>{{ itemTitle }}</h1>
-            <p>{{ itemContent }}</p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ itemTitle }}</h5>
+            <p class="card-text">{{itemContent}}</p>
         </div>
     </div>
 </template>
@@ -14,15 +14,5 @@ export default {
         'itemContent': String,
         'price': Number
         },
-    mounted() {
-        console.log(this.itemTitle);
-
-        // setTimeout(() => {
-        //     this.itemTitle = "New Title"
-        // }, 6000)
-
-        // modifying prop is a bad idea.
-        // this.itemTitle = "New Title";
-    }
 }
 </script>

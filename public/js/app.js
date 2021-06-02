@@ -1859,13 +1859,6 @@ __webpack_require__.r(__webpack_exports__);
     'itemTitle': String,
     'itemContent': String,
     'price': Number
-  },
-  mounted: function mounted() {
-    console.log(this.itemTitle); // setTimeout(() => {
-    //     this.itemTitle = "New Title"
-    // }, 6000)
-    // modifying prop is a bad idea.
-    // this.itemTitle = "New Title";
   }
 });
 
@@ -1901,6 +1894,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -1909,17 +1907,30 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       bookables: null,
-      loading: false
+      loading: false,
+      columns: 3
     };
   },
   // beforeCreate() {
   //     console.log('before create');
   // },
+  computed: {
+    rows: function rows() {
+      return this.bookables === null ? 0 : Math.ceil(this.bookables.length / this.columns);
+    }
+  },
+  methods: {
+    bookablesInRow: function bookablesInRow(row) {
+      return this.bookables.slice((row - 1) * this.columns, row * this.columns);
+    },
+    placeholderInRow: function placeholderInRow(row) {
+      return this.columns - this.bookablesInRow(row).length;
+    }
+  },
   created: function created() {
     var _this = this;
 
     this.loading = true;
-    console.log("created");
     setTimeout(function () {
       _this.bookables = [{
         title: "Random Title1",
@@ -1927,6 +1938,21 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         title: "Random Title2",
         content: "Something something2"
+      }, {
+        title: "Random Title3",
+        content: "Something something3"
+      }, {
+        title: "Random Title4",
+        content: "Something something4"
+      }, {
+        title: "Random Title5",
+        content: "Something somethin5"
+      }, {
+        title: "Random Title6",
+        content: "Something something6"
+      }, {
+        title: "Random Title7",
+        content: "Something something7"
       }];
       _this.loading = false;
     }, 2000);
@@ -37803,11 +37829,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card mb-4 p-4" }, [
-      _c("h1", [_vm._v(_vm._s(_vm.itemTitle))]),
+  return _c("div", { staticClass: "card mb-4" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.itemTitle))]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.itemContent))])
+      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.itemContent))])
     ])
   ])
 }
@@ -37839,17 +37865,39 @@ var render = function() {
       ? _c("div", [_vm._v("Data is Loading")])
       : _c(
           "div",
-          _vm._l(_vm.bookables, function(bookable, index) {
-            return _c("bookable-list-item", {
-              key: index,
-              attrs: {
-                "item-title": bookable.title,
-                "item-content": bookable.content,
-                price: 13324
-              }
-            })
+          _vm._l(_vm.rows, function(row) {
+            return _c(
+              "div",
+              { key: "row" + row, staticClass: "row" },
+              [
+                _vm._l(_vm.bookablesInRow(row), function(bookable, column) {
+                  return _c(
+                    "div",
+                    { key: "row" + row + column, staticClass: "col" },
+                    [
+                      _c("bookable-list-item", {
+                        attrs: {
+                          "item-title": bookable.title,
+                          "item-content": bookable.content,
+                          price: 13324
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.placeholderInRow(row), function(p) {
+                  return _c("div", {
+                    key: "placeholder" + row + p,
+                    staticClass: "col"
+                  })
+                })
+              ],
+              2
+            )
           }),
-          1
+          0
         )
   ])
 }
