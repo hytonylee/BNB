@@ -22,3 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/bookables', function  (Request $request) {
     return Bookable::all();
 });
+
+
+Route::get('/bookables/{id}', function (Request $request, $id){
+// Route::get('/bookables/{id}/{optional?}', function (Request $request, $id, $optional=null){
+//     dd($id, $optional);
+    return Bookable::findOrFail($id);
+});

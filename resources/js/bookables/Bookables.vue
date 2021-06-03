@@ -4,13 +4,13 @@
         <div v-else>
             <div class="row" v-for="row in rows" :key="'row'+ row">
                 <div
-                    class="col"
+                    class="col d-flex align-item-stretch"
                     v-for="(bookable, column) in bookablesInRow(row)"
                     :key =" 'row' + row + column"
                 >
                     <bookable-list-item
                         :item-title="bookable.title"
-                        :item-content="bookable.content"
+                        :item-description="bookable.description"
                         :price="13324"
                     ></bookable-list-item>
                 </div>
@@ -54,38 +54,22 @@ export default {
     created() {
         this.loading = true;
 
-        setTimeout(() => {
-            this.bookables = [{
-                title: "Random Title1",
-                content: "Something something1"
-            },
-            {
-                title: "Random Title2",
-                content: "Something something2"
-            },
-            {
-                title: "Random Title3",
-                content: "Something something3"
-            },
-            {
-                title: "Random Title4",
-                content: "Something something4"
-            },
-            {
-                title: "Random Title5",
-                content: "Something somethin5"
-            },
-            {
-                title: "Random Title6",
-                content: "Something something6"
-            },
-            {
-                title: "Random Title7",
-                content: "Something something7"
-            },
-            ];
-            this.loading = false;
-        }, 2000);
+        const p = new Promise((resolve, reject) => {
+            console.log(resolve);
+            console.log(reject);
+            setTimeout(() => resolve("hello"),3000);
+        }).then(result=> console.log(`Success ${result}`))
+          .catch(error=>console.log(`Error ${error}`));
+
+        console.log(p);
+
+        const request = axios
+            .get('/api/bookables')
+            .then(res => {
+                this.bookables = res.data;
+                this.loading = false;
+            });
+
     },
 }
 </script>

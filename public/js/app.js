@@ -1857,7 +1857,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     'itemTitle': String,
-    'itemContent': String,
+    'itemDescription': String,
     'price': Number
   }
 });
@@ -1931,31 +1931,22 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.loading = true;
-    setTimeout(function () {
-      _this.bookables = [{
-        title: "Random Title1",
-        content: "Something something1"
-      }, {
-        title: "Random Title2",
-        content: "Something something2"
-      }, {
-        title: "Random Title3",
-        content: "Something something3"
-      }, {
-        title: "Random Title4",
-        content: "Something something4"
-      }, {
-        title: "Random Title5",
-        content: "Something somethin5"
-      }, {
-        title: "Random Title6",
-        content: "Something something6"
-      }, {
-        title: "Random Title7",
-        content: "Something something7"
-      }];
+    var p = new Promise(function (resolve, reject) {
+      console.log(resolve);
+      console.log(reject);
+      setTimeout(function () {
+        return resolve("hello");
+      }, 3000);
+    }).then(function (result) {
+      return console.log("Success ".concat(result));
+    })["catch"](function (error) {
+      return console.log("Error ".concat(error));
+    });
+    console.log(p);
+    var request = axios.get('/api/bookables').then(function (res) {
+      _this.bookables = res.data;
       _this.loading = false;
-    }, 2000);
+    });
   }
 });
 
@@ -37829,11 +37820,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mb-4" }, [
+  return _c("div", { staticClass: "card mb-4 w-100" }, [
     _c("div", { staticClass: "card-body" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.itemTitle))]),
       _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.itemContent))])
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v(_vm._s(_vm.itemDescription))
+      ])
     ])
   ])
 }
@@ -37873,12 +37866,15 @@ var render = function() {
                 _vm._l(_vm.bookablesInRow(row), function(bookable, column) {
                   return _c(
                     "div",
-                    { key: "row" + row + column, staticClass: "col" },
+                    {
+                      key: "row" + row + column,
+                      staticClass: "col d-flex align-item-stretch"
+                    },
                     [
                       _c("bookable-list-item", {
                         attrs: {
                           "item-title": bookable.title,
-                          "item-content": bookable.content,
+                          "item-description": bookable.description,
                           price: 13324
                         }
                       })
