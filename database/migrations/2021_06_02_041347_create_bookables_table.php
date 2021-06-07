@@ -13,13 +13,15 @@ class CreateBookablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookables', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        if (!Schema::hasTable('bookables')) {
+            Schema::create('bookables', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
 
-            $table->string('title');
-            $table->string('description', 255);
-        });
+                $table->string('title');
+                $table->string('description', 255);
+            });
+        }
     }
 
     /**

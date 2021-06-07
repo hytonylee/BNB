@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         \App\Models\Bookable::factory(100)->create();
+        $this->call(BookingsTableSeeder::class);
     }
 }
