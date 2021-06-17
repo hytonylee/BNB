@@ -38442,9 +38442,11 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row pt-4" }, [
       _c("div", { staticClass: "col-md-6" }, [_vm._v("John Doe")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 d-flex justify-content-end" }, [
-        _vm._v("Star Rating")
-      ])
+      _c(
+        "div",
+        { staticClass: "col-md-6 d-flex justify-content-end text-uppercase" },
+        [_vm._v("Star Rating")]
+      )
     ])
   },
   function() {

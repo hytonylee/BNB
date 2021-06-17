@@ -12,8 +12,14 @@ class Booking extends Model
 
     protected $fillable = ['from', 'to'];
 
-    public function bookable(){
+    public function bookable()
+    {
         return $this->belongsTo(Bookable::class);
+    }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class);
     }
 
     // customise the query

@@ -5,7 +5,7 @@
         <div class="border-bottom d-none d-md-block" v-for="number in 3" :key="number">
             <div class="row pt-4">
                 <div class="col-md-6">John Doe</div>
-                <div class="col-md-6 d-flex justify-content-end">Star Rating</div>
+                <div class="col-md-6 d-flex justify-content-end text-uppercase">Star Rating</div>
             </div>
             <div class="row">
                 <div class="col-md-12">Added 5 minutes ago</div>
