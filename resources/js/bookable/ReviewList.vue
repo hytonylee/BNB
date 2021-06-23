@@ -8,7 +8,7 @@
                 <div class="row pt-4">
                     <div class="col-md-6">John Doe</div>
                     <div class="col-md-6 d-flex justify-content-end text-uppercase">
-                        <star-rating :rating="review.rating"></star-rating>
+                        <star-rating :rating="review.rating" class="fa-sm"></star-rating>
                     </div>
                 </div>
                 <div class="row">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-// import moment from 'moment';
+import moment from 'moment';
 
 export default {
     props: {
@@ -41,11 +41,11 @@ export default {
             .then(response => this.reviews = response.data.data)
             .then(() => this.loading = false);
     },
-    // filters: {
-    //     fromNow(value) {
-    //         return moment(value).fromNow();
-    //     }
-    // }
+    filters: {
+        fromNow(value) {
+            return moment(value).fromNow();
+        }
+    }
 }
 </script>
 
