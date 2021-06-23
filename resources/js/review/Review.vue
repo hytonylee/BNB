@@ -2,7 +2,7 @@
     <div>
         <div class="form-group">
             <label class="text-muted">Select the star rating: </label>
-            <star-rating :rating="5" class="fa-2x" v-on:rating:changed="review.rating = $event"></star-rating>
+            <star-rating class="fa-2x" v-model="review.rating"></star-rating>
         </div>
         <div class="form-group">
             <label for="content" class="text-muted">Share your experience:</label>

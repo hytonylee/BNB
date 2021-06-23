@@ -2264,22 +2264,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    rating: Number
+    value: Number
   },
   computed: {
     halfStar: function halfStar() {
-      var fraction = Math.round((this.rating - Math.floor(this.rating)) * 100); // console.log(fraction);
+      var fraction = Math.round((this.value - Math.floor(this.value)) * 100); // console.log(fraction);
 
       return fraction > 0 && fraction < 50;
     },
     fullStars: function fullStars() {
       // >4.5 = 5
       // 4.3 = 4
-      return Math.round(this.rating);
+      return Math.round(this.value);
     },
     emptyStars: function emptyStars() {
-      // if rating = 1.9, ceil(1.9) = 2, 5-2=3, render 3 empty stars
-      return 5 - Math.ceil(this.rating);
+      // if value = 1.9, ceil(1.9) = 2, 5-2=3, render 3 empty stars
+      return 5 - Math.ceil(this.value);
     }
   } // created() {
   //     const numbers = [0.9, 4.2, 1.3, 4.5, 3.2, 4.9];
@@ -60229,7 +60229,7 @@ var render = function() {
                     [
                       _c("star-rating", {
                         staticClass: "fa-sm",
-                        attrs: { rating: review.rating }
+                        attrs: { value: review.rating }
                       })
                     ],
                     1
@@ -60392,11 +60392,12 @@ var render = function() {
         _vm._v(" "),
         _c("star-rating", {
           staticClass: "fa-2x",
-          attrs: { rating: 5 },
-          on: {
-            "rating:changed": function($event) {
-              _vm.review.rating = $event
-            }
+          model: {
+            value: _vm.review.rating,
+            callback: function($$v) {
+              _vm.$set(_vm.review, "rating", $$v)
+            },
+            expression: "review.rating"
           }
         })
       ],
@@ -60459,7 +60460,7 @@ var render = function() {
           staticClass: "fas fa-star",
           on: {
             click: function($event) {
-              return _vm.$emit("rating:changed", star)
+              return _vm.$emit("input", star)
             }
           }
         })
@@ -60470,7 +60471,7 @@ var render = function() {
             staticClass: "fas fa-star-half-alt",
             on: {
               click: function($event) {
-                return _vm.$emit("rating:changed", _vm.halfStar)
+                return _vm.$emit("input", _vm.halfStar)
               }
             }
           })
@@ -60482,7 +60483,7 @@ var render = function() {
           staticClass: "far fa-star",
           on: {
             click: function($event) {
-              return _vm.$emit("rating:changed", _vm.fullStars + star)
+              return _vm.$emit("input", _vm.fullStars + star)
             }
           }
         })

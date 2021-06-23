@@ -8,7 +8,7 @@
                 <div class="row pt-4">
                     <div class="col-md-6">John Doe</div>
                     <div class="col-md-6 d-flex justify-content-end text-uppercase">
-                        <star-rating :rating="review.rating" class="fa-sm"></star-rating>
+                        <star-rating :value="review.rating" class="fa-sm"></star-rating>
                     </div>
                 </div>
                 <div class="row">
