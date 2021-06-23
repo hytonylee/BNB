@@ -2209,15 +2209,29 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     halfStar: function halfStar() {
-      return false;
+      var fraction = Math.round((this.rating - Math.floor(this.rating)) * 100); // console.log(fraction);
+
+      return fraction > 0 && fraction < 50;
     },
     fullStars: function fullStars() {
-      return 4;
+      // >4.5 = 5
+      // 4.3 = 4
+      return Math.round(this.rating);
     },
     emptyStars: function emptyStars() {
-      return 1;
+      // if rating = 1.9, ceil(1.9) = 2, 5-2=3, render 3 empty stars
+      return 5 - Math.ceil(this.rating);
     }
-  }
+  } // created() {
+  //     const numbers = [0.9, 4.2, 1.3, 4.5, 3.2, 4.9];
+  //     numbers.forEach(n => {
+  //         console.log(`round for ${n} is ${Math.round(n)}`);
+  //         console.log(`floor for ${n} is ${Math.floor(n)}`);
+  //         console.log(`ceil for ${n} is ${Math.ceil(n)}`);
+  //         console.log(`=================================`);
+  //     })
+  // }
+
 });
 
 /***/ }),
@@ -60075,7 +60089,7 @@ var render = function() {
                       staticClass:
                         "col-md-6 d-flex justify-content-end text-uppercase"
                     },
-                    [_c("star-rating")],
+                    [_c("star-rating", { attrs: { rating: review.rating } })],
                     1
                   )
                 ]),
