@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             <label for="content" class="text-muted">Share your experience:</label>
-            <textarea name="content" class="form-control" cols="30" rows="10"></textarea>
+            <textarea name="content" class="form-control" cols="30" rows="10" v-model="review.content"></textarea>
         </div>
 
         <button
@@ -31,6 +31,11 @@ export default {
                 content: null
             }
         }
+    },
+    created() {
+        // 1. check if review already exists (in review table by id)
+        // 2. fetch a booking by a review key
+        // 3. store the review
     }
 }
 

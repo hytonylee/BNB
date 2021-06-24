@@ -2228,6 +2228,10 @@ __webpack_require__.r(__webpack_exports__);
         content: null
       }
     };
+  },
+  created: function created() {// 1. check if review already exists (in review table by id)
+    // 2. fetch a booking by a review key
+    // 3. store the review
   }
 });
 
@@ -60404,30 +60408,40 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "text-muted", attrs: { for: "content" } }, [
+        _vm._v("Share your experience:")
+      ]),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.review.content,
+            expression: "review.content"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { name: "content", cols: "30", rows: "10" },
+        domProps: { value: _vm.review.content },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.review, "content", $event.target.value)
+          }
+        }
+      })
+    ]),
     _vm._v(" "),
     _c("button", { staticClass: "btn btn-lg btn-primary btn-block" }, [
       _vm._v("\n        Submit\n    ")
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-muted", attrs: { for: "content" } }, [
-        _vm._v("Share your experience:")
-      ]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { name: "content", cols: "30", rows: "10" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
