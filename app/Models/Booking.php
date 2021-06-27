@@ -25,9 +25,18 @@ class Booking extends Model
     }
 
     // customise the query
-    public function scopeBetweenDates(Builder $query, $from, $to){
-        return $query->where('to', '>=', $from)
-            ->where('from', '<=', $to);
+    public function scopeBetweenDates(Builder $query, $from, $to)
+    {
+      return $query->where('to', '>=', $from)
+          ->where('from', '<=', $to);
+    }
+
+    // find booking by review_key
+    // since php7, you can add what class expect to return in a function
+    // ?Booking this means you expect instance of booking to return or null
+    public static function findByReviewKey(string $reviewKey): ?Booking
+    {
+      return static::where('review_key', $reviewKey)->with('bookable')->get()->first();
     }
 
     protected static function boot()
