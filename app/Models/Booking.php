@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
+//laravel.com/docs/master/eloquent#events
 class Booking extends Model
 {
     use HasFactory;
